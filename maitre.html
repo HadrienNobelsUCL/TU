@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maîtres du jeu</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>🎩 Espace maîtres du jeu</h1>
+    <a href="index.html">← Retour au jeu</a> · <a href="qrcodes.html">QR codes des équipes</a>
+  </header>
+  <div id="bandeau" hidden>Mode test local : les données ne sont stockées que dans ce navigateur (voir README).</div>
+  <main>
+    <section id="login">
+      <h2>Connexion</h2>
+      <div class="rangee"><input type="password" id="pin" placeholder="Code d'accès"><button id="pin-go">Entrer</button></div>
+      <div class="msg" id="pin-msg"></div>
+    </section>
+    <div id="panneau" hidden>
+      <section><h2>1. Choisir l'équipe</h2><div class="rangee choix-equipes" id="choix-equipe"></div></section>
+      <div id="actions"></div>
+      <section><h2>Derniers événements</h2><div id="journal"></div></section>
+    </div>
+  </main>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/maitre.js"></script>
+</body>
+</html>

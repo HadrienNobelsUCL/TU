@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QR codes des équipes</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>🔳 QR codes des équipes</h1>
+    <a href="maitre.html">← Espace maîtres</a>
+  </header>
+  <main>
+    <section id="login">
+      <h2>Connexion</h2>
+      <div class="rangee"><input type="password" id="pin" placeholder="Code d'accès"><button id="pin-go">Entrer</button></div>
+      <div class="msg" id="pin-msg"></div>
+    </section>
+    <div id="contenu" hidden>
+      <section id="qr-config">
+        <h2>Adresse du site</h2>
+        <p>Adresse du dossier du site (se terminant par <code>/</code>), à vérifier avant d'imprimer, surtout après l'achat du nom de domaine :</p>
+        <div class="rangee"><input type="text" id="base" style="flex:1;min-width:240px"><button id="regen">Générer</button></div>
+        <p class="vide">Imprimez cette page (Ctrl+P) : une carte par équipe. Chaque QR code ouvre le site et permet à l'équipe de créer son mot de passe.</p>
+      </section>
+      <section><div class="qr-grille" id="qrs"></div></section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+  <script src="js/config.js"></script>
+  <script>
+    const ok = () => sessionStorage.getItem("maitre") === "1";
+    function afficher() {
+      document.getElementById("login").hidden = ok();
+      document.getElementById("contenu").hidden = !ok();
+      if (ok()) generer();
+    }
+    document.getElementById("pin-go").onclick = () => {
+      if (document.getElementById("pin").value === window.PIN_MAITRE) { sessionStorage.setItem("maitre", "1"); afficher(); }
+      else document.getElementById("pin-msg").textContent = "Code incorrect.";
+    };
+    document.getElementById("base").value = location.href.replace(/[^/]*$/, "");
+    document.getElementById("regen").onclick = generer;
+    function generer() {
+      const base = document.getElementById("base").value.trim();
+      document.getElementById("qrs").innerHTML = window.EQUIPES.map(e => {
+        const qr = qrcode(0, "M");
+        qr.addData(`${base.replace(/\/?$/, "/")}activer.html?equipe=${e.id}`);
+        qr.make();
+        return `<div class="qr-carte" style="border-color:${e.couleur}"><h3>${e.icone} ${e.nom}</h3>${qr.createImgTag(6, 8)}<p>Scannez pour créer le mot de passe de votre équipe</p></div>`;
+      }).join("");
+    }
+    afficher();
+  </script>
+</body>
+</html>

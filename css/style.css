@@ -1,0 +1,61 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; background: #f3f1ea; color: #222; }
+header { background: #2d3a4b; color: #fff; padding: 12px 16px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; }
+header h1 { margin: 0; font-size: 1.3rem; }
+header a { color: #ffd166; }
+main { max-width: 1100px; margin: auto; padding: 12px; }
+section { background: #fff; border-radius: 10px; padding: 14px; margin-bottom: 14px; box-shadow: 0 1px 4px #0002; }
+h2 { margin-top: 0; }
+#carte { height: 420px; border-radius: 8px; }
+#bandeau { background: #ffe8a3; padding: 6px 16px; font-size: .85rem; }
+.vide { color: #888; font-style: italic; }
+.grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+.carte-equipe { border: 3px solid #ccc; border-radius: 10px; padding: 10px; }
+.carte-equipe h3 { margin: 0 0 6px; }
+.malus { padding-left: 0; list-style: none; margin: 6px 0 0; }
+.malus li { background: #f3f1ea; border-radius: 6px; padding: 4px 8px; margin-bottom: 4px; }
+.malus li.special { background: #ffe1e1; }
+.cat { font-size: .75rem; font-weight: bold; text-transform: uppercase; color: #555; display: block; }
+.log { font-size: .85rem; padding-left: 18px; max-height: 220px; overflow: auto; }
+button { cursor: pointer; border: 0; border-radius: 6px; padding: 8px 12px; font-size: 1rem; background: #2d3a4b; color: #fff; }
+button:disabled { background: #ccc; color: #888; cursor: not-allowed; }
+button.ok { background: #2e9e4f; } button.ko { background: #c0392b; }
+button.plus { background: #2e9e4f; } button.moins { background: #c0392b; }
+select, input[type=text], input[type=number], input[type=password] { padding: 8px; font-size: 1rem; border: 1px solid #bbb; border-radius: 6px; }
+.rangee { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; align-items: center; }
+.defi { border: 1px dashed #888; border-radius: 8px; padding: 8px; margin: 6px 0; }
+.choix-equipes button { border: 3px solid transparent; }
+.choix-equipes button.sel { border-color: #ffd166; }
+.liste-malus button { text-align: left; }
+.msg { color: #c0392b; min-height: 1.2em; }
+.heure { font-weight: bold; color: #2d3a4b; margin-right: 4px; }
+.log { list-style: none; padding-left: 0; }
+.log li { padding: 3px 0; border-bottom: 1px solid #eee; }
+.qr-grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.qr-carte { text-align: center; border: 3px solid #ccc; border-radius: 10px; padding: 10px; break-inside: avoid; }
+.qr-carte img { width: 100%; max-width: 220px; }
+@media print { header, #qr-config, button { display: none; } }
+#scoreboard svg { display: block; width: 100%; max-width: 480px; height: auto; margin: 0 auto; background: #e9f2e0; border-radius: 8px; }
+
+/* ===== Mobile (le jeu se joue sur téléphone) ===== */
+html { -webkit-text-size-adjust: 100%; }
+button, select { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+button { min-height: 44px; min-width: 44px; }
+select, input[type=text], input[type=number], input[type=password] { min-height: 44px; font-size: 16px; } /* 16px : évite le zoom auto iOS */
+main { padding: 8px; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+section { padding: 12px; margin-bottom: 10px; }
+header { padding-top: max(10px, env(safe-area-inset-top)); }
+.rangee > button { flex: 1 1 auto; }
+.choix-equipes button { flex: 1 1 45%; }
+.liste-malus button { flex: 1 1 100%; }
+.defi .rangee > button { flex: 1 1 45%; }
+.rangee select { flex: 1 1 100%; }
+.rangee > span { flex: 1 1 100%; }
+.log { max-height: none; }
+@media (max-width: 600px) {
+  header h1 { font-size: 1.05rem; }
+  #carte { height: 55vh; min-height: 300px; }
+  h2 { font-size: 1.15rem; }
+  .grille { grid-template-columns: 1fr; }
+  #login .rangee > * { flex: 1 1 100%; }
+}
