@@ -13,7 +13,7 @@ function dessiner(s) {
     return;
   }
   if (s.auth[eq.id]) { location.replace("index.html"); return; } // déjà activé : site normal
-  box.innerHTML = `<h2 style="color:${eq.couleur}">${eq.icone} ${esc(eq.nom)}</h2>
+  box.innerHTML = `<h2 style="color:${eq.couleur}">${badge(eq)} ${esc(eq.nom)}</h2>
     <p>Bienvenue ! Commencez par créer le mot de passe de votre équipe.</p>
     <div class="rangee"><input type="password" id="mdp" placeholder="Mot de passe (4 caractères min.)" autocomplete="new-password">
     <input type="password" id="mdp2" placeholder="Confirmer le mot de passe" autocomplete="new-password">

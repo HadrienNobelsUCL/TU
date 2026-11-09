@@ -17,12 +17,15 @@ window.CARTE_ZOOM = 15;
 
 // Les 5 équipes
 window.EQUIPES = [
-  { id: "t1", nom: "Équipe 1", couleur: "#e6194b", icone: "🦊" },
-  { id: "t2", nom: "Équipe 2", couleur: "#3cb44b", icone: "🐸" },
-  { id: "t3", nom: "Équipe 3", couleur: "#4363d8", icone: "🐳" },
-  { id: "t4", nom: "Équipe 4", couleur: "#f58231", icone: "🦁" },
-  { id: "t5", nom: "Équipe 5", couleur: "#911eb4", icone: "🐼" },
+  { id: "t1", nom: "Baladins", couleur: "#1f3a93", icone: "B" },
+  { id: "t2", nom: "Seeonee", couleur: "#7ed957", icone: "S" },
+  { id: "t3", nom: "PDH", couleur: "#1b6b3a", icone: "P" },
+  { id: "t4", nom: "Agoja", couleur: "#4fc3f7", icone: "A" },
+  { id: "t5", nom: "Pionniers", couleur: "#d62828", icone: "P" },
 ];
+
+// Pastille ronde colorée avec la première lettre de l'équipe
+window.badge = e => `<span class="badge" style="background:${e.couleur}">${e.icone}</span>`;
 
 // Les 6 catégories (une par mini-jeu), chacune avec 5 malus prédéfinis + lieu sur la carte.
 // Remplacez les textes, adresses et coordonnées (lat, lng) quand vous les connaîtrez.

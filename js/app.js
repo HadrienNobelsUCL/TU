@@ -44,7 +44,7 @@ function dessinerPiste() {
     const x = p.x + n.x * off, y = p.y + n.y * off;
     const g = mk("g", {});
     mk("circle", { cx: x, cy: y, r: 15, fill: e.couleur, stroke: "#fff", "stroke-width": 3 }, g);
-    const t = mk("text", { x, y: y + 6, "text-anchor": "middle", "font-size": 17 }, g);
+    const t = mk("text", { x, y: y + 6, "text-anchor": "middle", "font-size": 17, "font-weight": "bold", fill: "#fff", stroke: "#0006", "stroke-width": 0.5 }, g);
     t.textContent = e.icone;
     mk("title", {}, g).textContent = `${e.nom} : ${km} km`;
   });
@@ -52,7 +52,7 @@ function dessinerPiste() {
   const lg = document.createElement("div");
   lg.className = "rangee";
   lg.innerHTML = [...EQUIPES].sort((a, b) => etat.teams[b.id].km - etat.teams[a.id].km)
-    .map(e => `<span style="border-left:6px solid ${e.couleur};padding-left:6px">${e.icone} ${esc(e.nom)} : <b>${etat.teams[e.id].km} km</b></span>`).join("");
+    .map(e => `<span style="border-left:6px solid ${e.couleur};padding-left:6px">${badge(e)} ${esc(e.nom)} : <b>${etat.teams[e.id].km} km</b></span>`).join("");
   document.getElementById("piste").appendChild(lg);
 }
 
@@ -61,7 +61,7 @@ function dessinerDashboards() {
   document.getElementById("dashboards").innerHTML = EQUIPES.map(e => {
     const t = etat.teams[e.id];
     return `<div class="carte-equipe" style="border-color:${e.couleur}">
-      <h3>${e.icone} ${esc(e.nom)} – ${t.km} km</h3>${htmlMalusEquipe(t)}</div>`;
+      <h3>${badge(e)} ${esc(e.nom)} – ${t.km} km</h3>${htmlMalusEquipe(t)}</div>`;
   }).join("");
 }
 
@@ -79,11 +79,11 @@ function dessinerCompte() {
   const box = document.getElementById("mon-equipe");
   if (monEquipe) {
     const e = equipe(monEquipe);
-    box.innerHTML = `<div class="rangee"><span>Connecté : <b style="color:${e.couleur}">${e.icone} ${esc(e.nom)}</b></span><button class="ko" id="c-out">Se déconnecter</button></div>`;
+    box.innerHTML = `<div class="rangee"><span>Connecté : <b>${badge(e)} ${esc(e.nom)}</b></span><button class="ko" id="c-out">Se déconnecter</button></div>`;
     document.getElementById("c-out").onclick = deconnecter;
     return;
   }
-  const choix = EQUIPES.map(e => `<button data-id="${e.id}" class="${e.id === cibleLogin ? "sel" : ""}" style="background:${e.couleur}">${e.icone} ${esc(e.nom)}</button>`).join("");
+  const choix = EQUIPES.map(e => `<button data-id="${e.id}" class="${e.id === cibleLogin ? "sel" : ""}" style="  background:${e.couleur};color:#fff;text-shadow:0 0 2px #000a">${esc(e.nom)}</button>`).join("");
   let form = "";
   if (cibleLogin) {
     const auth = etat.auth[cibleLogin];
@@ -119,7 +119,7 @@ function dessinerDefis() {
   const attente = Object.entries(etat.challenges).filter(([, c]) => c.statut === "attente");
   const recus = attente.filter(([, c]) => c.vers === monEquipe);
   const envoyes = attente.filter(([, c]) => c.de === monEquipe);
-  const ph = c => `${equipe(c.de).icone} <b>${esc(equipe(c.de).nom)}</b> ⇄ ${equipe(c.vers).icone} <b>${esc(equipe(c.vers).nom)}</b> – catégorie <b>${esc(CATEGORIES[c.cat].nom)}</b>`;
+  const ph = c => `${badge(equipe(c.de))} <b>${esc(equipe(c.de).nom)}</b> ⇄ ${badge(equipe(c.vers))} <b>${esc(equipe(c.vers).nom)}</b> – catégorie <b>${esc(CATEGORIES[c.cat].nom)}</b>`;
   const nomMalus = (tid, cat) => { const i = etat.teams[tid].malus["c" + cat]; return i === undefined ? "?" : CATEGORIES[cat].malus[i]; };
   const info = c => `<br><small>${esc(equipe(c.de).nom)} donne « ${esc(nomMalus(c.de, c.cat))} », ${esc(equipe(c.vers).nom)} donne « ${esc(nomMalus(c.vers, c.cat))} »</small>`;
   box.innerHTML = `

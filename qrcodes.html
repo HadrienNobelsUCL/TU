@@ -48,7 +48,7 @@
         const qr = qrcode(0, "M");
         qr.addData(`${base.replace(/\/?$/, "/")}activer.html?equipe=${e.id}`);
         qr.make();
-        return `<div class="qr-carte" style="border-color:${e.couleur}"><h3>${e.icone} ${e.nom}</h3>${qr.createImgTag(6, 8)}<p>Scannez pour créer le mot de passe de votre équipe</p></div>`;
+        return `<div class="qr-carte" style="border-color:${e.couleur}"><h3>${badge(e)} ${e.nom}</h3>${qr.createImgTag(6, 8)}<p>Scannez pour créer le mot de passe de votre équipe</p></div>`;
       }).join("");
     }
     afficher();

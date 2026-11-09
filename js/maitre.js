@@ -28,7 +28,7 @@ function rendre() {
   if (!connecte()) return;
   const box = document.getElementById("choix-equipe");
   box.innerHTML = EQUIPES.map(e =>
-    `<button data-id="${e.id}" class="${e.id === equipeSel ? "sel" : ""}" style="background:${e.couleur}">${e.icone} ${esc(e.nom)} (${etat.teams[e.id].km} km)</button>`).join("");
+    `<button data-id="${e.id}" class="${e.id === equipeSel ? "sel" : ""}" style="background:${e.couleur};color:#fff;text-shadow:0 0 2px #000a">${esc(e.nom)} (${etat.teams[e.id].km} km)</button>`).join("");
   box.querySelectorAll("button").forEach(b => b.onclick = () => { equipeSel = b.dataset.id; catSel = null; message = ""; rendre(); });
   document.getElementById("journal").innerHTML = htmlLog(etat, 25);
 
@@ -55,10 +55,12 @@ function rendre() {
   }
 
   act.innerHTML = `
-    <section style="border-left:8px solid ${e.couleur}"><h2>${e.icone} ${esc(e.nom)} – ${t.km} km</h2>
+    <section style="border-left:8px solid ${e.couleur}"><h2>${badge(e)} ${esc(e.nom)} – ${t.km} km</h2>
       <h3>2. Kilomètres</h3>
-      <div class="rangee">${[-25, -10, -5, -1, 1, 5, 10, 25].map(d => `<button class="${d > 0 ? "plus" : "moins"}" data-km="${d}">${d > 0 ? "+" : ""}${d}</button>`).join("")}
-        <input type="number" id="km-libre" placeholder="Autre" style="width:90px"><button id="km-ok">Appliquer</button></div>
+      <div class="rangee">
+        <select id="km-signe" style="flex:0 0 80px"><option value="1">+</option><option value="-1">−</option></select>
+        <input type="number" id="km-libre" min="1" placeholder="Nombre de km" inputmode="numeric" style="flex:1;min-width:120px">
+        <button class="ok" id="km-ok">Appliquer</button></div>
       <h3>3. Ajouter un malus</h3>
       <div class="rangee">${CATEGORIES.map((c, ci) => `<button data-cat="${ci}" style="${catSel === ci ? "outline:3px solid #ffd166" : ""}">${esc(c.nom)}${t.malus["c" + ci] !== undefined ? " ✔" : ""}</button>`).join("")}</div>
       ${listeMalus}
@@ -69,10 +71,10 @@ function rendre() {
       <div class="msg">${esc(message)}</div>
     </section>`;
 
-  act.querySelectorAll("[data-km]").forEach(b => b.onclick = () => agir(s => Regles.ajouterKm(s, equipeSel, Number(b.dataset.km))));
   document.getElementById("km-ok").onclick = () => {
-    const v = parseInt(document.getElementById("km-libre").value, 10);
-    if (v) agir(s => Regles.ajouterKm(s, equipeSel, v));
+    const v = Math.abs(parseInt(document.getElementById("km-libre").value, 10));
+    const signe = Number(document.getElementById("km-signe").value);
+    if (v) agir(s => Regles.ajouterKm(s, equipeSel, signe * v));
   };
   act.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => { catSel = Number(b.dataset.cat); message = ""; rendre(); });
   act.querySelectorAll("[data-add]").forEach(b => b.onclick = () => { const c = catSel; catSel = null; agir(s => Regles.ajouterMalus(s, equipeSel, c, Number(b.dataset.add))); });
@@ -87,7 +89,7 @@ function rendre() {
 DB.subscribe(s => {
   etat = s;
   const ae = document.activeElement;
-  if (ae && (ae.id === "spec-txt" || ae.id === "km-libre")) return; // ne pas perdre la saisie
+  if (ae && (ae.id === "spec-txt" || ae.id === "km-libre" || ae.id === "km-signe")) return; // ne pas perdre la saisie
   rendre();
 });
 afficher();
