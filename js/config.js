@@ -33,17 +33,17 @@ window.badge = e => `<span class="badge" style="background:${e.couleur}">${e.ico
 // Les 6 catégories (une par mini-jeu), chacune avec 5 malus prédéfinis + lieu sur la carte.
 // Remplacez les textes, adresses et coordonnées (lat, lng) quand vous les connaîtrez.
 window.CATEGORIES = [
-  { nom: "Déguisement", lieu: "Mini-jeu 1 – adresse à venir", lat: 51.0690, lng: 5.5500,
-    malus: ["Déguisement 1", "Déguisement 2", "Déguisement 3", "Déguisement 4", "Déguisement 5"] },
-  { nom: "Catégorie 2", lieu: "Mini-jeu 2 – adresse à venir", lat: 51.0680, lng: 5.5560,
-    malus: ["Malus 2.1", "Malus 2.2", "Malus 2.3", "Malus 2.4", "Malus 2.5"] },
-  { nom: "Catégorie 3", lieu: "Mini-jeu 3 – adresse à venir", lat: 51.0650, lng: 5.5570,
-    malus: ["Malus 3.1", "Malus 3.2", "Malus 3.3", "Malus 3.4", "Malus 3.5"] },
-  { nom: "Catégorie 4", lieu: "Mini-jeu 4 – adresse à venir", lat: 51.0640, lng: 5.5510,
+  { nom: "Communication", lieu: "Epreuve 1 – adresse à venir", lat: 51.0690, lng: 5.5500,
+    malus: ["Les robots ont mangé mes chaussettes", "50 ans ma poule", "Vive la révolution", "Déguisement 4", "Déguisement 5"] },
+  { nom: "Emotion", lieu: "Epreuve 2 – adresse à venir", lat: 51.0680, lng: 5.5560,
+    malus: ["Colère", "Tristesse", "Joie", "Peur", "Surprise"] },
+  { nom: "Matériel", lieu: "Epreuve 3 – adresse à venir", lat: 51.0650, lng: 5.5570,
+    malus: ["Objet Bala", "Objet Seeonee", "Objet PDH", "Objet Agoja", "Objet Pionniers"] },
+  { nom: "Textile", lieu: "Epreuve 4 – adresse à venir", lat: 51.0640, lng: 5.5510,
     malus: ["Malus 4.1", "Malus 4.2", "Malus 4.3", "Malus 4.4", "Malus 4.5"] },
-  { nom: "Catégorie 5", lieu: "Mini-jeu 5 – adresse à venir", lat: 51.0650, lng: 5.5440,
-    malus: ["Malus 5.1", "Malus 5.2", "Malus 5.3", "Malus 5.4", "Malus 5.5"] },
-  { nom: "Catégorie 6", lieu: "Mini-jeu 6 – adresse à venir", lat: 51.0680, lng: 5.5435,
+  { nom: "Audio", lieu: "Epreuve 5 – adresse à venir", lat: 51.0650, lng: 5.5440,
+    malus: ["GIMS - CIEL", "Rassemblement baladins", "Charger - Triangle des Bermudes", "Soleil Bleu", "Les démons de minuit"] },
+  { nom: "Personnalité", lieu: "Epreuve 6 – adresse à venir", lat: 51.0680, lng: 5.5435,
     malus: ["Malus 6.1", "Malus 6.2", "Malus 6.3", "Malus 6.4", "Malus 6.5"] },
 ];
 

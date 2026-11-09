@@ -7,7 +7,6 @@ main { max-width: 1100px; margin: auto; padding: 12px; }
 section { background: #fff; border-radius: 10px; padding: 14px; margin-bottom: 14px; box-shadow: 0 1px 4px #0002; }
 h2 { margin-top: 0; }
 #carte { height: 420px; border-radius: 8px; }
-#bandeau { background: #ffe8a3; padding: 6px 16px; font-size: .85rem; }
 .vide { color: #888; font-style: italic; }
 .grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
 .carte-equipe { border: 3px solid #ccc; border-radius: 10px; padding: 10px; }

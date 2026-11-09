@@ -4,7 +4,6 @@ let equipeSel = "";
 let catSel = null;
 let message = "";
 
-if (DB.mode === "local") document.getElementById("bandeau").hidden = false;
 
 function connecte() { return sessionStorage.getItem("maitre") === "1"; }
 function afficher() {
