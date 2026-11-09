@@ -25,7 +25,9 @@ select, input[type=text], input[type=number], input[type=password] { padding: 8p
 .defi { border: 1px dashed #888; border-radius: 8px; padding: 8px; margin: 6px 0; }
 .choix-equipes button { border: 3px solid transparent; }
 .choix-equipes button.sel { border-color: #ffd166; }
-.liste-malus button { text-align: left; }
+.liste-malus button { text-align: left; background: #bcd0ee; color: #12264a; border: 1px solid #8fa9d3; }
+.liste-malus button:disabled { background: #e4e4e4; color: #999; border-color: #ccc; }
+.liste-malus { background: #eef3fb; border-radius: 8px; padding: 8px; }
 .msg { color: #c0392b; min-height: 1.2em; }
 .badge { display: inline-flex; align-items: center; justify-content: center; width: 1.6em; height: 1.6em; border-radius: 50%; color: #fff; font-weight: bold; font-size: .85em; border: 2px solid #fff; box-shadow: 0 0 0 1px #0004; text-shadow: 0 0 2px #000a; vertical-align: middle; }
 .heure { font-weight: bold; color: #2d3a4b; margin-right: 4px; }
