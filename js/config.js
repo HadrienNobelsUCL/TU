@@ -17,10 +17,10 @@ window.CARTE_ZOOM = 15;
 
 // Les 5 équipes
 window.EQUIPES = [
-  { id: "t1", nom: "Baladins", couleur: "#1f3a93", icone: "B" },
+  { id: "t1", nom: "Baladins", couleur: "#101f5a", icone: "B" },
   { id: "t2", nom: "Seeonee", couleur: "#7ed957", icone: "S" },
   { id: "t3", nom: "PDH", couleur: "#1b6b3a", icone: "P" },
-  { id: "t4", nom: "Agoja", couleur: "#4fc3f7", icone: "A" },
+  { id: "t4", nom: "Agoja", couleur: "#2144a0", icone: "A" },
   { id: "t5", nom: "Pionniers", couleur: "#d62828", icone: "P" },
 ];
 
