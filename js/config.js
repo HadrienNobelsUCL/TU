@@ -3,12 +3,15 @@
 // Code d'accès de l'interface des maîtres du jeu (maitre.html)
 window.PIN_MAITRE = "1234";
 
-// Coordonnées Firebase (voir README.md). Laisser vide = mode test local (navigateur seulement).
 window.FIREBASE_CONFIG = {
-  // apiKey: "...",
-  // authDomain: "...",
-  // databaseURL: "https://VOTRE-PROJET-default-rtdb.europe-west1.firebasedatabase.app",
-  // projectId: "...",
+  apiKey: "AIzaSyAqvZyczT6aNdQJwJB5bJCCZjEIsCH8sZo",
+  authDomain: "tu2026-58919.firebaseapp.com",
+  databaseURL: "https://tu2026-58919-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "tu2026-58919",
+  storageBucket: "tu2026-58919.firebasestorage.app",
+  messagingSenderId: "183523022892",
+  appId: "1:183523022892:web:d63f8cbd282c8f85fb9989",
+  measurementId: "G-FB5KNBMJW7"
 };
 
 // Centre de la carte : Schoolstraat, 3670 Oudsbergen (approximatif, à ajuster)
