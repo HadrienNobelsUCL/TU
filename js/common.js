@@ -87,12 +87,14 @@ const DB = (() => {
 // ---- Règles du jeu (utilisées dans les transactions) ----
 const Regles = {
   ajouterKm(s, tid, delta) {
+    if (equipe(tid).staff) return "Cette équipe n'a pas de kilomètres.";
     const t = s.teams[tid];
     t.km = Math.max(0, Math.min(KM_MAX, t.km + delta));
     addLog(s, `${equipe(tid).nom} : ${delta > 0 ? "+" : ""}${delta} km (total ${t.km})`);
   },
   ajouterMalus(s, tid, cat, i) {
     const k = cleMalus(cat, i), t = s.teams[tid];
+    if (equipe(tid).staff) return "Cette équipe ne reçoit que des ressources créatives spéciales (texte libre).";
     if (s.assigned[k]) return "Cette ressource créative est déjà attribuée.";
     if (t.malus["c" + cat] !== undefined) return "Cette équipe a déjà une ressource créative dans cette catégorie. Utilisez la catégorie spéciale.";
     s.assigned[k] = tid;

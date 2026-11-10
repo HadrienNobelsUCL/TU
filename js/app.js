@@ -40,8 +40,9 @@ function dessinerPiste() {
     lab.textContent = km === 0 ? "Départ" : km === KM_MAX ? "500 km" : km + " km";
   }
   // Équipes : décalage perpendiculaire pour éviter les chevauchements
-  EQUIPES.forEach((e, idx) => {
-    const km = etat.teams[e.id].km, p = pt(km), n = normale(km), off = (idx - 2) * 17;
+  const avecKm = EQUIPES.filter(e => !e.staff);
+  avecKm.forEach((e, idx) => {
+    const km = etat.teams[e.id].km, p = pt(km), n = normale(km), off = (idx - (avecKm.length - 1) / 2) * 17;
     const x = p.x + n.x * off, y = p.y + n.y * off;
     const g = mk("g", {});
     mk("circle", { cx: x, cy: y, r: 15, fill: e.couleur, stroke: "#fff", "stroke-width": 3 }, g);
@@ -52,7 +53,7 @@ function dessinerPiste() {
   document.getElementById("piste").replaceChildren(svg);
   const lg = document.createElement("div");
   lg.className = "rangee";
-  lg.innerHTML = [...EQUIPES].sort((a, b) => etat.teams[b.id].km - etat.teams[a.id].km)
+  lg.innerHTML = [...avecKm].sort((a, b) => etat.teams[b.id].km - etat.teams[a.id].km)
     .map(e => `<span style="border-left:6px solid ${e.couleur};padding-left:6px">${badge(e)} ${esc(e.nom)} : <b>${etat.teams[e.id].km} km</b></span>`).join("");
   document.getElementById("piste").appendChild(lg);
 }
@@ -62,7 +63,7 @@ function dessinerDashboards() {
   document.getElementById("dashboards").innerHTML = EQUIPES.map(e => {
     const t = etat.teams[e.id];
     return `<div class="carte-equipe" style="border-color:${e.couleur}">
-      <h3>${badge(e)} ${esc(e.nom)} – ${t.km} km</h3>${htmlMalusEquipe(t)}</div>`;
+      <h3>${badge(e)} ${esc(e.nom)}${e.staff ? "" : ` – ${t.km} km`}</h3>${htmlMalusEquipe(t)}</div>`;
   }).join("");
 }
 
@@ -84,7 +85,7 @@ function dessinerCompte() {
     document.getElementById("c-out").onclick = deconnecter;
     return;
   }
-  const choix = EQUIPES.map(e => `<button data-id="${e.id}" class="${e.id === cibleLogin ? "sel" : ""}" style="  background:${e.couleur};color:#fff;text-shadow:0 0 2px #000a">${esc(e.nom)}</button>`).join("");
+  const choix = EQUIPES.filter(e => !e.staff).map(e => `<button data-id="${e.id}" class="${e.id === cibleLogin ? "sel" : ""}" style="  background:${e.couleur};color:#fff;text-shadow:0 0 2px #000a">${esc(e.nom)}</button>`).join("");
   let form = "";
   if (cibleLogin) {
     const auth = etat.auth[cibleLogin];
@@ -116,7 +117,8 @@ let msgDefi = "";
 function dessinerDefis() {
   const box = document.getElementById("defis-contenu");
   if (!monEquipe) { box.innerHTML = `<p class="vide">Connectez-vous avec le mot de passe de votre équipe (section « Mon équipe ») pour proposer ou accepter un échange.</p>`; return; }
-  const autres = EQUIPES.filter(e => e.id !== monEquipe);
+  if (equipe(monEquipe).staff) { box.innerHTML = `<p class="vide">Les échanges ne concernent pas cette équipe.</p>`; return; }
+  const autres = EQUIPES.filter(e => e.id !== monEquipe && !e.staff);
   const attente = Object.entries(etat.challenges).filter(([, c]) => c.statut === "attente");
   const recus = attente.filter(([, c]) => c.vers === monEquipe);
   const envoyes = attente.filter(([, c]) => c.de === monEquipe);
@@ -156,7 +158,7 @@ function saisieEnCours(id) {
 let finFermee = false;
 function dessinerFin() {
   let ov = document.getElementById("fin");
-  const gagne = monEquipe && etat.teams[monEquipe].km >= KM_MAX;
+  const gagne = monEquipe && !equipe(monEquipe).staff && etat.teams[monEquipe].km >= KM_MAX;
   if (!gagne) { if (ov) ov.remove(); finFermee = false; return; }
   if (finFermee) { if (ov) ov.remove(); return; }
   if (ov) return;

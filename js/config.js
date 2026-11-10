@@ -27,6 +27,7 @@ window.EQUIPES = [
   { id: "t3", nom: "PDH", couleur: "#1b6b3a", icone: "P" },
   { id: "t4", nom: "Agoja", couleur: "#2144a0", icone: "A" },
   { id: "t5", nom: "Pionniers", couleur: "#d62828", icone: "P" },
+  { id: "t6", nom: "Staff d'U", couleur: "#ff69b4", icone: "U", staff: true }, // pas de km, ressources en texte libre uniquement
 ];
 
 // Pastille ronde colorée avec la première lettre de l'équipe
@@ -45,8 +46,6 @@ window.CATEGORIES = [
     malus: ["Malus 4.1", "Malus 4.2", "Malus 4.3", "Malus 4.4", "Malus 4.5"] },
   { nom: "Audio", lieu: "Epreuve 5 – adresse à venir", lat: 51.0650, lng: 5.5440,
     malus: ["GIMS - CIEL", "Rassemblement baladins", "Charger - Triangle des Bermudes", "Soleil Bleu", "Les démons de minuit"] },
-  { nom: "Personnalité", lieu: "Epreuve 6 – adresse à venir", lat: 51.0680, lng: 5.5435,
-    malus: ["Malus 6.1", "Malus 6.2", "Malus 6.3", "Malus 6.4", "Malus 6.5"] },
 ];
 
 window.KM_MAX = 500;

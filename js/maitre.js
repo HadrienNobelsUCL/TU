@@ -6,6 +6,14 @@ let message = "";
 
 
 function connecte() { return sessionStorage.getItem("maitre") === "1"; }
+// Connexion automatique via QR code (?pin=...), puis nettoyage de l'adresse
+{
+  const p = new URLSearchParams(location.search).get("pin");
+  if (p !== null) {
+    if (p === window.PIN_MAITRE) sessionStorage.setItem("maitre", "1");
+    history.replaceState(null, "", location.pathname);
+  }
+}
 function afficher() {
   document.getElementById("login").hidden = connecte();
   document.getElementById("panneau").hidden = !connecte();
@@ -27,7 +35,7 @@ function rendre() {
   if (!connecte()) return;
   const box = document.getElementById("choix-equipe");
   box.innerHTML = EQUIPES.map(e =>
-    `<button data-id="${e.id}" class="${e.id === equipeSel ? "sel" : ""}" style="background:${e.couleur};color:#fff;text-shadow:0 0 2px #000a">${esc(e.nom)} (${etat.teams[e.id].km} km)</button>`).join("");
+    `<button data-id="${e.id}" class="${e.id === equipeSel ? "sel" : ""}" style="background:${e.couleur};color:#fff;text-shadow:0 0 2px #000a">${esc(e.nom)}${e.staff ? "" : ` (${etat.teams[e.id].km} km)`}</button>`).join("");
   box.querySelectorAll("button").forEach(b => b.onclick = () => { equipeSel = b.dataset.id; catSel = null; message = ""; rendre(); });
   document.getElementById("journal").innerHTML = htmlLog(etat, 25);
 
@@ -54,15 +62,15 @@ function rendre() {
   }
 
   act.innerHTML = `
-    <section style="border-left:8px solid ${e.couleur}"><h2>${badge(e)} ${esc(e.nom)} – ${t.km} km</h2>
-      <h3>2. Kilomètres</h3>
+    <section style="border-left:8px solid ${e.couleur}"><h2>${badge(e)} ${esc(e.nom)}${e.staff ? "" : ` – ${t.km} km`}</h2>
+      ${e.staff ? "" : `<h3>2. Kilomètres</h3>
       <div class="rangee">
         <select id="km-signe" style="flex:0 0 80px"><option value="1">+</option><option value="-1">−</option></select>
         <input type="number" id="km-libre" min="1" placeholder="Nombre de km" inputmode="numeric" style="flex:1;min-width:120px">
         <button class="ok" id="km-ok">Appliquer</button></div>
       <h3>3. Ajouter une ressource créative</h3>
       <div class="rangee">${CATEGORIES.map((c, ci) => `<button data-cat="${ci}" style="${catSel === ci ? "outline:3px solid #ff2bd6" : ""}">${esc(c.nom)}${t.malus["c" + ci] !== undefined ? " ✔" : ""}</button>`).join("")}</div>
-      ${listeMalus}
+      ${listeMalus}`}
       <h3>Ressource créative spéciale (texte libre, non échangeable)</h3>
       <div class="rangee"><input type="text" id="spec-txt" placeholder="Ex : Parler en rimes pendant 10 min" style="flex:1;min-width:200px"><button id="spec-ok">Ajouter</button></div>
       <h3>Ressources créatives actuelles</h3>
@@ -70,7 +78,7 @@ function rendre() {
       <div class="msg">${esc(message)}</div>
     </section>`;
 
-  document.getElementById("km-ok").onclick = () => {
+  if (!e.staff) document.getElementById("km-ok").onclick = () => {
     const v = Math.abs(parseInt(document.getElementById("km-libre").value, 10));
     const signe = Number(document.getElementById("km-signe").value);
     if (v) agir(s => Regles.ajouterKm(s, equipeSel, signe * v));

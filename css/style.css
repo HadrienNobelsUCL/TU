@@ -40,6 +40,10 @@ select, input[type=text], input[type=number], input[type=password] { padding: 8p
 .qr-grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
 .qr-carte { text-align: center; border: 3px solid #ccc; border-radius: 10px; padding: 10px; break-inside: avoid; }
 .qr-carte img { width: 100%; max-width: 220px; }
+.qr-double { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.qr-double > div { flex: 1 1 180px; }
+.qr-carte:has(.qr-double) { grid-column: span 2; }
+@media (max-width: 500px) { .qr-carte:has(.qr-double) { grid-column: auto; } }
 @media print { header, #qr-config, button { display: none; } }
 #scoreboard svg { display: block; width: 100%; max-width: 480px; height: auto; margin: 0 auto; background: #e9f2e0; border-radius: 8px; }
 
