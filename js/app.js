@@ -151,8 +151,30 @@ function saisieEnCours(id) {
   return !!(ae && ae.matches && ae.matches("input,select") && ae.closest("#" + id));
 }
 
+let finFermee = false;
+function dessinerFin() {
+  let ov = document.getElementById("fin");
+  const gagne = monEquipe && etat.teams[monEquipe].km >= KM_MAX;
+  if (!gagne) { if (ov) ov.remove(); finFermee = false; return; }
+  if (finFermee) { if (ov) ov.remove(); return; }
+  if (ov) return;
+  const e = equipe(monEquipe);
+  ov = document.createElement("div"); ov.id = "fin"; document.body.appendChild(ov);
+  ov.innerHTML = `<div class="fin-boite">
+    <h2>Félicitations, humains ${badge(e)} ${esc(e.nom)} !</h2>
+    <p><b>Vous avez réussi à réparer la machine à remonter dans le temps, à récupérer des fragments de créativité et vous êtes maintenant arrivé à votre camp d’entrainement.</b></p>
+    <p><b>Mais attention : vous n'avez pas encore gagné.</b></p>
+    <p><b>Les robots ont effacé de la mémoire collective la capacité de rêver, de créer, de rire et de penser librement.</b></p>
+    <p><b>Vous avez désormais une heure pour assembler tous les fragments récoltés durant votre voyage et créer une œuvre capable de réveiller l'humanité.</b></p>
+    <p><b>À 21h30, votre création sera votre seule arme.</b></p>
+    <p><b>Ne nous décevez pas. L'avenir de l'humanité repose entre vos mains.</b></p>
+    <button id="fin-ok">Fermer</button></div>`;
+  document.getElementById("fin-ok").onclick = () => { finFermee = true; ov.remove(); };
+}
+
 function rendre(force) {
   monEquipe = sessionValide();
+  dessinerFin();
   dessinerPiste(); dessinerDashboards();
   document.getElementById("journal").innerHTML = htmlLog(etat);
   // ne pas écraser une saisie ou une sélection en cours

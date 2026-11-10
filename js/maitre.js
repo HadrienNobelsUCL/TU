@@ -46,7 +46,7 @@ function rendre() {
   if (catSel !== null) {
     const deja = t.malus["c" + catSel] !== undefined;
     listeMalus = deja
-      ? `<p class="msg">${esc(e.nom)} a déjà un malus « ${esc(CATEGORIES[catSel].nom)} » : utilisez un malus spécial ci-dessous.</p>`
+      ? `<p class="msg">${esc(e.nom)} a déjà une ressource créative « ${esc(CATEGORIES[catSel].nom)} » : utilisez une ressource créative spéciale ci-dessous.</p>`
       : `<div class="liste-malus rangee">${CATEGORIES[catSel].malus.map((m, i) => {
           const pris = etat.assigned[cleMalus(catSel, i)];
           return `<button data-add="${i}" ${pris ? "disabled" : ""}>${esc(m)}${pris ? ` (déjà à ${esc(equipe(pris).nom)})` : ""}</button>`;
@@ -60,12 +60,12 @@ function rendre() {
         <select id="km-signe" style="flex:0 0 80px"><option value="1">+</option><option value="-1">−</option></select>
         <input type="number" id="km-libre" min="1" placeholder="Nombre de km" inputmode="numeric" style="flex:1;min-width:120px">
         <button class="ok" id="km-ok">Appliquer</button></div>
-      <h3>3. Ajouter un malus</h3>
+      <h3>3. Ajouter une ressource créative</h3>
       <div class="rangee">${CATEGORIES.map((c, ci) => `<button data-cat="${ci}" style="${catSel === ci ? "outline:3px solid #ffd166" : ""}">${esc(c.nom)}${t.malus["c" + ci] !== undefined ? " ✔" : ""}</button>`).join("")}</div>
       ${listeMalus}
-      <h3>Malus spécial (texte libre, non échangeable)</h3>
+      <h3>Ressource créative spéciale (texte libre, non échangeable)</h3>
       <div class="rangee"><input type="text" id="spec-txt" placeholder="Ex : Parler en rimes pendant 10 min" style="flex:1;min-width:200px"><button id="spec-ok">Ajouter</button></div>
-      <h3>Malus actuels</h3>
+      <h3>Ressources créatives actuelles</h3>
       ${retraits.join("") || `<p class="vide">Aucun.</p>`}
       <div class="msg">${esc(message)}</div>
     </section>`;

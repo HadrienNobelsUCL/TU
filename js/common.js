@@ -93,15 +93,15 @@ const Regles = {
   },
   ajouterMalus(s, tid, cat, i) {
     const k = cleMalus(cat, i), t = s.teams[tid];
-    if (s.assigned[k]) return "Ce malus est déjà attribué.";
-    if (t.malus["c" + cat] !== undefined) return "Cette équipe a déjà un malus dans cette catégorie. Utilisez la catégorie spéciale.";
+    if (s.assigned[k]) return "Cette ressource créative est déjà attribuée.";
+    if (t.malus["c" + cat] !== undefined) return "Cette équipe a déjà une ressource créative dans cette catégorie. Utilisez la catégorie spéciale.";
     s.assigned[k] = tid;
     t.malus["c" + cat] = i;
     addLog(s, `${equipe(tid).nom} reçoit « ${CATEGORIES[cat].malus[i]} » (${CATEGORIES[cat].nom})`);
   },
   retirerMalus(s, tid, cat) {
     const t = s.teams[tid], i = t.malus["c" + cat];
-    if (i === undefined) return "Malus introuvable.";
+    if (i === undefined) return "Ressource créative introuvable.";
     delete t.malus["c" + cat];
     delete s.assigned[cleMalus(cat, i)];
     addLog(s, `${equipe(tid).nom} perd « ${CATEGORIES[cat].malus[i]} »`);
@@ -110,18 +110,18 @@ const Regles = {
     texte = (texte || "").trim();
     if (!texte) return "Texte vide.";
     s.teams[tid].special["s" + Date.now() + Math.random().toString(36).slice(2, 5)] = texte;
-    addLog(s, `${equipe(tid).nom} reçoit un malus spécial : « ${texte} »`);
+    addLog(s, `${equipe(tid).nom} reçoit une ressource créative spéciale : « ${texte} »`);
   },
   retirerSpecial(s, tid, sid) {
     const txt = s.teams[tid].special[sid];
-    if (txt === undefined) return "Malus introuvable.";
+    if (txt === undefined) return "Ressource créative introuvable.";
     delete s.teams[tid].special[sid];
-    addLog(s, `${equipe(tid).nom} perd le malus spécial « ${txt} »`);
+    addLog(s, `${equipe(tid).nom} perd la ressource créative spéciale « ${txt} »`);
   },
   proposerEchange(s, de, vers, cat) {
     if (de === vers) return "Choisissez une autre équipe.";
-    if (s.teams[de].malus["c" + cat] === undefined) return "Votre équipe n'a pas de malus dans cette catégorie.";
-    if (s.teams[vers].malus["c" + cat] === undefined) return "L'autre équipe n'a pas de malus dans cette catégorie.";
+    if (s.teams[de].malus["c" + cat] === undefined) return "Votre équipe n'a pas de ressource créative dans cette catégorie.";
+    if (s.teams[vers].malus["c" + cat] === undefined) return "L'autre équipe n'a pas de ressource créative dans cette catégorie.";
     const dup = Object.values(s.challenges).some(c => c.statut === "attente" && c.cat === cat &&
       [c.de, c.vers].some(x => x === de || x === vers));
     if (dup) return "Un échange est déjà en attente pour cette catégorie et l'une de ces équipes.";
@@ -134,7 +134,7 @@ const Regles = {
     if (!c || c.statut !== "attente") return "Défi introuvable ou déjà traité.";
     if (accepte) {
       const a = s.teams[c.de], b = s.teams[c.vers], k = "c" + c.cat;
-      if (a.malus[k] === undefined || b.malus[k] === undefined) { c.statut = "annule"; return "Un des malus n'existe plus : échange annulé."; }
+      if (a.malus[k] === undefined || b.malus[k] === undefined) { c.statut = "annule"; return "Une des ressources créatives n'existe plus : échange annulé."; }
       const ia = a.malus[k], ib = b.malus[k];
       a.malus[k] = ib; b.malus[k] = ia;
       s.assigned[cleMalus(c.cat, ia)] = c.vers;
@@ -166,7 +166,7 @@ function htmlMalusEquipe(t) {
     if (i !== undefined) items.push(`<li><span class="cat">${esc(c.nom)}</span> ${esc(c.malus[i])}</li>`);
   });
   Object.values(t.special).forEach(txt => items.push(`<li class="special"><span class="cat">★ Spécial</span> ${esc(txt)}</li>`));
-  return items.length ? `<ul class="malus">${items.join("")}</ul>` : `<p class="vide">Aucun malus 🎉</p>`;
+  return items.length ? `<ul class="malus">${items.join("")}</ul>` : `<p class="vide">Aucune ressource créative</p>`;
 }
 
 function heure(k) {

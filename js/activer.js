@@ -8,7 +8,7 @@ function dessiner(s) {
   if (!eq) { box.innerHTML = `<p class="msg">QR code invalide.</p>`; return; }
   if (cree) {
     box.innerHTML = `<h2>✅ Mot de passe créé !</h2>
-      <p>Notez-le bien et partagez-le avec les membres de <b>${esc(eq.nom)}</b> : il sera demandé sur le site pour gérer vos échanges de malus.</p>
+      <p>Notez-le bien et partagez-le avec les membres de <b>${esc(eq.nom)}</b> : il sera demandé sur le site pour gérer vos échanges de ressources créatives.</p>
       <a href="index.html"><button class="ok">Aller sur le site</button></a>`;
     return;
   }
