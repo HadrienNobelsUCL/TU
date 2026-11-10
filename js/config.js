@@ -15,7 +15,7 @@ window.FIREBASE_CONFIG = {
 };
 
 // Centre de la carte : Schoolstraat, 3670 Oudsbergen (approximatif, à ajuster)
-window.CARTE_CENTRE = [51.0667, 5.5500];
+window.CARTE_CENTRE = [51.128207700621246, 5.54780611739903];
 // Lieu de départ et d'arrivée (maison) : remplacez lat/lng
 window.MAISON = { lat: 51.128207700621246, lng: 5.54780611739903, nom: "Départ / Arrivée" };
 window.CARTE_ZOOM = 15;
