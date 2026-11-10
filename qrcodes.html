@@ -55,7 +55,9 @@
         return `<div class="qr-carte" style="border-color:${e.couleur}"><h3>${badge(e)} ${e.nom}</h3>${img(b + "activer.html?equipe=" + e.id)}<p>Scannez pour créer le mot de passe de votre équipe</p></div>`;
       }).join("") + Array.from({ length: 5 }, (_, i) => {
         const b = base.replace(/\/?$/, "/");
-        return `<div class="qr-carte" style="border-color:#000"><h3><span class="badge" style="background:#000">R</span> La Route</h3>${img(b + "maitre.html?pin=" + encodeURIComponent(window.PIN_MAITRE))}<p>Épreuve ${i + 1} – espace maîtres</p></div>`;
+        return `<div class="qr-carte" style="border-color:#000"><h3><span class="badge" style="background:#000">R</span> La Route – Épreuve ${i + 1}</h3>
+          <div class="qr-double"><div>${img(b + "index.html")}<p>Voir le site</p></div>
+          <div>${img(b + "maitre.html?pin=" + encodeURIComponent(window.PIN_MAITRE))}<p>Espace maîtres</p></div></div></div>`;
       }).join("");
     }
     afficher();
