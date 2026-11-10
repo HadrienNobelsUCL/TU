@@ -16,6 +16,8 @@ window.FIREBASE_CONFIG = {
 
 // Centre de la carte : Schoolstraat, 3670 Oudsbergen (approximatif, à ajuster)
 window.CARTE_CENTRE = [51.0667, 5.5500];
+// Lieu de départ et d'arrivée (maison) : remplacez lat/lng
+window.MAISON = { lat: 51.0665, lng: 5.5500, nom: "Départ / Arrivée" };
 window.CARTE_ZOOM = 15;
 
 // Les 5 équipes
