@@ -61,7 +61,7 @@ function rendre() {
         <input type="number" id="km-libre" min="1" placeholder="Nombre de km" inputmode="numeric" style="flex:1;min-width:120px">
         <button class="ok" id="km-ok">Appliquer</button></div>
       <h3>3. Ajouter une ressource créative</h3>
-      <div class="rangee">${CATEGORIES.map((c, ci) => `<button data-cat="${ci}" style="${catSel === ci ? "outline:3px solid #ffd166" : ""}">${esc(c.nom)}${t.malus["c" + ci] !== undefined ? " ✔" : ""}</button>`).join("")}</div>
+      <div class="rangee">${CATEGORIES.map((c, ci) => `<button data-cat="${ci}" style="${catSel === ci ? "outline:3px solid #ff2bd6" : ""}">${esc(c.nom)}${t.malus["c" + ci] !== undefined ? " ✔" : ""}</button>`).join("")}</div>
       ${listeMalus}
       <h3>Ressource créative spéciale (texte libre, non échangeable)</h3>
       <div class="rangee"><input type="text" id="spec-txt" placeholder="Ex : Parler en rimes pendant 10 min" style="flex:1;min-width:200px"><button id="spec-ok">Ajouter</button></div>

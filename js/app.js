@@ -7,23 +7,23 @@ let monEquipe = "";
 const carte = L.map("carte").setView(window.CARTE_CENTRE, window.CARTE_ZOOM);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "© OpenStreetMap" }).addTo(carte);
 CATEGORIES.forEach((c, i) => {
-  const icone = L.divIcon({ className: "", html: `<div style="background:#2d3a4b;color:#fff;border:2px solid #ffd166;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:bold">${i + 1}</div>`, iconSize: [30, 30], iconAnchor: [15, 15] });
+  const icone = L.divIcon({ className: "", html: `<div style="background:#0d1426;color:#00e5ff;border:2px solid #00e5ff;box-shadow:0 0 10px #00e5ff;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:bold">${i + 1}</div>`, iconSize: [30, 30], iconAnchor: [15, 15] });
   L.marker([c.lat, c.lng], { icon: icone }).addTo(carte).bindPopup(`<b>Epreuve ${i + 1} : ${esc(c.nom)}</b><br>${esc(c.lieu)}`);
 });
 
 // ---- Piste ----
-const CHEMIN = "M 100 660 C 100 560, 300 560, 300 460 S 100 360, 100 260 S 300 160, 300 60";
+const CHEMIN = "M 50 340 C 330 340, 350 210, 200 205 S 70 70, 350 70";
 function dessinerPiste() {
   const NS = "http://www.w3.org/2000/svg";
   const svg = document.createElementNS(NS, "svg");
-  svg.setAttribute("viewBox", "0 0 400 720");
+  svg.setAttribute("viewBox", "0 0 400 400");
   const mk = (tag, attrs, parent = svg) => {
     const el = document.createElementNS(NS, tag);
     Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
     parent.appendChild(el); return el;
   };
-  const route = mk("path", { d: CHEMIN, fill: "none", stroke: "#cfc6a8", "stroke-width": 34, "stroke-linecap": "round" });
-  mk("path", { d: CHEMIN, fill: "none", stroke: "#fff", "stroke-width": 3, "stroke-dasharray": "10 10" });
+  const route = mk("path", { d: CHEMIN, fill: "none",   stroke: "#16254a", "stroke-width": 34, "stroke-linecap": "round" });
+    mk("path", { d: CHEMIN, fill: "none", stroke: "#00e5ff", "stroke-width": 2, "stroke-dasharray": "10 10", opacity: .7 });
   const L0 = route.getTotalLength();
   const pt = km => route.getPointAtLength(L0 * km / KM_MAX);
   const normale = km => {
@@ -33,9 +33,9 @@ function dessinerPiste() {
   };
   for (let km = 0; km <= KM_MAX; km += 100) {
     const p = pt(km), n = normale(km);
-    mk("line", { x1: p.x - n.x * 28, y1: p.y - n.y * 28, x2: p.x + n.x * 28, y2: p.y + n.y * 28, stroke: "#333", "stroke-width": 3, "stroke-dasharray": "5 5" });
-    const lab = mk("text", { x: p.x + n.x * 42, y: p.y + n.y * 42 + 5, "text-anchor": "middle", "font-size": 18, "font-weight": "bold", fill: "#333" });
-    lab.textContent = km === 0 ? "Départ" : km === KM_MAX ? "🏆 500 km" : km + " km";
+    mk("line", { x1: p.x - n.x * 28, y1: p.y - n.y * 28, x2: p.x + n.x * 28, y2: p.y + n.y * 28, stroke: "#ff2bd6", "stroke-width": 3, "stroke-dasharray": "5 5" });
+    const lab = mk("text", { x: p.x + n.x * 42, y: p.y + n.y * 42 + 5, "text-anchor": "middle", "font-size": 18, "font-weight": "bold", fill: "#d6e6ff" });
+    lab.textContent = km === 0 ? "Départ" : km === KM_MAX ? "500 km" : km + " km";
   }
   // Équipes : décalage perpendiculaire pour éviter les chevauchements
   EQUIPES.forEach((e, idx) => {
