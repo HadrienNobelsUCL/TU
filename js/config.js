@@ -17,7 +17,7 @@ window.FIREBASE_CONFIG = {
 // Centre de la carte : Schoolstraat, 3670 Oudsbergen (approximatif, à ajuster)
 window.CARTE_CENTRE = [51.0667, 5.5500];
 // Lieu de départ et d'arrivée (maison) : remplacez lat/lng
-window.MAISON = { lat: 51.0665, lng: 5.5500, nom: "Départ / Arrivée" };
+window.MAISON = { lat: 51.128207700621246, lng: 5.54780611739903, nom: "Départ / Arrivée" };
 window.CARTE_ZOOM = 15;
 
 // Les 5 équipes
@@ -36,15 +36,15 @@ window.badge = e => `<span class="badge" style="background:${e.couleur}">${e.ico
 // Les 6 catégories (une par mini-jeu), chacune avec 5 malus prédéfinis + lieu sur la carte.
 // Remplacez les textes, adresses et coordonnées (lat, lng) quand vous les connaîtrez.
 window.CATEGORIES = [
-  { nom: "Communication", lieu: "Epreuve 1 – adresse à venir", lat: 51.0690, lng: 5.5500,
-    malus: ["Les robots ont mangé mes chaussettes", "50 ans ma poule", "Vive la révolution", "Déguisement 4", "Déguisement 5"] },
-  { nom: "Emotion", lieu: "Epreuve 2 – adresse à venir", lat: 51.0680, lng: 5.5560,
+  { nom: "Communication", lieu: "Epreuve 1", lat: 51.0690, lng: 5.5500,
+    malus: ["Les robots ont mangé mes chaussettes", "Dans 20-30 ans y en aura plus", "Skibidi tentafruit", "+1000 aura", "Bismillah, c’est les ténèbres"] },
+  { nom: "Emotion", lieu: "Epreuve 2", lat: 51.0680, lng: 5.5560,
     malus: ["Colère", "Tristesse", "Joie", "Peur", "Surprise"] },
-  { nom: "Matériel", lieu: "Epreuve 3 – adresse à venir", lat: 51.0650, lng: 5.5570,
+  { nom: "Matériel", lieu: "Epreuve 3", lat: 51.0650, lng: 5.5570,
     malus: ["Objet Bala", "Objet Seeonee", "Objet PDH", "Objet Agoja", "Objet Pionniers"] },
-  { nom: "Textile", lieu: "Epreuve 4 – adresse à venir", lat: 51.0640, lng: 5.5510,
+  { nom: "Textile", lieu: "Epreuve 4", lat: 51.0640, lng: 5.5510,
     malus: ["Malus 4.1", "Malus 4.2", "Malus 4.3", "Malus 4.4", "Malus 4.5"] },
-  { nom: "Audio", lieu: "Epreuve 5 – adresse à venir", lat: 51.0650, lng: 5.5440,
+  { nom: "Audio", lieu: "Epreuve 5", lat: 51.0650, lng: 5.5440,
     malus: ["GIMS - CIEL", "Rassemblement baladins", "Charger - Triangle des Bermudes", "Soleil Bleu", "Les démons de minuit"] },
 ];
 
