@@ -18,7 +18,7 @@ window.FIREBASE_CONFIG = {
 window.CARTE_CENTRE = [51.128207700621246, 5.54780611739903];
 // Lieu de départ et d'arrivée (maison) : remplacez lat/lng
 window.MAISON = { lat: 51.128207700621246, lng: 5.54780611739903, nom: "Départ / Arrivée" };
-window.CARTE_ZOOM = 15;
+window.CARTE_ZOOM = 20;
 
 // Les 5 équipes
 window.EQUIPES = [
@@ -43,7 +43,7 @@ window.CATEGORIES = [
   { nom: "Matériel", lieu: "Epreuve 3", lat: 51.0650, lng: 5.5570,
     malus: ["Objet Bala", "Objet Seeonee", "Objet PDH", "Objet Agoja", "Objet Pionniers"] },
   { nom: "Textile", lieu: "Epreuve 4", lat: 51.0640, lng: 5.5510,
-    malus: ["Malus 4.1", "Malus 4.2", "Malus 4.3", "Malus 4.4", "Malus 4.5"] },
+    malus: ["Moine", "Tigre", "Djellaba", "Mousquetaire", "Tablier"] },
   { nom: "Audio", lieu: "Epreuve 5", lat: 51.0650, lng: 5.5440,
     malus: ["GIMS - CIEL", "Rassemblement baladins", "Charger - Triangle des Bermudes", "Soleil Bleu", "Les démons de minuit"] },
 ];
