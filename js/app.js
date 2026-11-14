@@ -8,7 +8,7 @@ const carte = L.map("carte").setView(window.CARTE_CENTRE, window.CARTE_ZOOM);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "© OpenStreetMap" }).addTo(carte);
 CATEGORIES.forEach((c, i) => {
   const icone = L.divIcon({ className: "", html: `<div style="background:#0d1426;color:#00e5ff;border:2px solid #00e5ff;box-shadow:0 0 10px #00e5ff;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:bold">${i + 1}</div>`, iconSize: [30, 30], iconAnchor: [15, 15] });
-  L.marker([c.lat, c.lng], { icon: icone }).addTo(carte).bindPopup(`<b>Epreuve ${i + 1} : ${esc(c.nom)}</b><br>${esc(c.lieu)}`);
+  L.marker([c.lat, c.lng], { icon: icone }).addTo(carte).bindPopup(`<b>${esc(c.nom)}</b>`);
 });
 const iconeMaison = L.divIcon({ className: "", html: `<div style="background:#0d1426;border:2px solid #ff2bd6;box-shadow:0 0 10px #ff2bd6;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-size:19px">🏠</div>`, iconSize: [34, 34], iconAnchor: [17, 17] });
 L.marker([MAISON.lat, MAISON.lng], { icon: iconeMaison }).addTo(carte).bindPopup(`<b>${esc(MAISON.nom)}</b>`);
