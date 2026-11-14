@@ -36,15 +36,15 @@ window.badge = e => `<span class="badge" style="background:${e.couleur}">${e.ico
 // Les 6 catégories (une par mini-jeu), chacune avec 5 malus prédéfinis + lieu sur la carte.
 // Remplacez les textes, adresses et coordonnées (lat, lng) quand vous les connaîtrez.
 window.CATEGORIES = [
-  { nom: "Communication", lieu: "Epreuve 1", lat: 51.0690, lng: 5.5500,
+  { nom: "Communication", lieu: "Epreuve 1", lat: 51.131626, lng: 5.523219,
     malus: ["Les robots ont mangé mes chaussettes", "Dans 20-30 ans y en aura plus", "Skibidi tentafruit", "+1000 aura", "Bismillah, c’est les ténèbres"] },
-  { nom: "Emotion", lieu: "Epreuve 2", lat: 51.0680, lng: 5.5560,
+  { nom: "Emotion", lieu: "Epreuve 2", lat: 51.1321389, lng: 5.5354648,
     malus: ["Colère", "Tristesse", "Joie", "Peur", "Surprise"] },
-  { nom: "Matériel", lieu: "Epreuve 3", lat: 51.0650, lng: 5.5570,
+  { nom: "Matériel", lieu: "Epreuve 3", lat: 51.131877, lng: 5.543761,
     malus: ["Objet Bala", "Objet Seeonee", "Objet PDH", "Objet Agoja", "Objet Pionniers"] },
-  { nom: "Textile", lieu: "Epreuve 4", lat: 51.0640, lng: 5.5510,
+  { nom: "Textile", lieu: "Epreuve 4", lat: 51.128179, lng: 5.539909,
     malus: ["Moine", "Tigre", "Djellaba", "Mousquetaire", "Tablier"] },
-  { nom: "Audio", lieu: "Epreuve 5", lat: 51.0650, lng: 5.5440,
+  { nom: "Audio", lieu: "Epreuve 5", lat: 51.128574, lng: 5.528358,
     malus: ["GIMS - CIEL", "Rassemblement baladins", "Charger - Triangle des Bermudes", "Soleil Bleu", "Les démons de minuit"] },
 ];
 
