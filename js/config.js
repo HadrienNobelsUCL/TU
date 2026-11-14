@@ -18,7 +18,7 @@ window.FIREBASE_CONFIG = {
 window.CARTE_CENTRE = [51.130749, 5.534313];
 // Lieu de départ et d'arrivée (maison) : remplacez lat/lng
 window.MAISON = { lat: 51.128207700621246, lng: 5.54780611739903, nom: "Départ / Arrivée" };
-window.CARTE_ZOOM = 14;
+window.CARTE_ZOOM = 16;
 
 // Les 5 équipes
 window.EQUIPES = [
